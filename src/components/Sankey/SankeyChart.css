@@ -1,0 +1,315 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  background-color: #202122;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --block-inner-padding: 16px;
+  --block-outer-padding: 16px;
+  --color-text-base: #FFFFFF;
+  --color-neg-hover: #2763A4;
+  --color-neg-highlight: #00347B;
+  --color-neg-active: #299ED9;
+  --color-neg-text-active: #FFFFFF;
+  --color-neg-base: #9BC6ED;
+  --color-neg-text-base: #66c4ef;
+  --color-short-text: #FFFFFF;
+  --color-difference: #D9DADA;
+  --color-difference-text: #FFFFFF;
+  --color-background: #202122;
+  --color-secondary-active: #FFFDE9;
+  --color-primary-active: #FFF392;
+}
+
+#revenue-chart-root {
+  width: 40%;
+}
+
+#spending-chart-root {
+  width: 60%;
+}
+
+.spending-only {
+  #revenue-chart-root {
+    display: none
+  }
+  
+  #spending-chart-root {
+    width: 60%;
+  }
+}
+
+
+/* Optionally adjust min-width to fit the charts */
+.sankey-chart-container {
+  position: relative;
+  background-color: #202122;
+  
+  .search-container {
+    width: 320px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+  }
+  
+  .node-tooltip {
+    z-index: 10;
+    width: 320px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #000;
+    color: var(--color-text-base);
+    padding: 10px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
+  
+  .node-tooltip-name {
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .node-tooltip-amount {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
+  
+  .charts {
+    width: 100%;
+    padding: 1rem 1.5rem 0px 1rem;
+    flex-grow: 1;
+    display: flex;
+    overflow: hidden;
+    column-gap: .5rem;
+  }
+  
+  .chart {
+    flex: 1 1 auto;
+  }
+  
+  
+  .chart.search-results {
+    padding-top: 50px;
+    width: 60%;
+    margin: 0 auto;
+  }
+  
+  .sankey-chart {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    column-gap: 30px;
+    flex: 1 1 auto;
+  }
+  
+  .sankey-chart[data-direction="left-to-right"] {
+    flex-direction: row;
+  }
+  
+  .sankey-chart[data-direction="right-to-left"] {
+    flex-direction: row-reverse;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    flex: 1 1 0%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+  }
+  
+  .column.narrow {
+    width: 36px;
+    flex: 0 0 auto;
+  }
+  
+  .group {
+    display: flex;
+    flex-direction: column;
+    row-gap: 13px;
+  }
+  
+  .block {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+  
+    background-color: var(--color-base);
+    color: var(--color-text-base);
+    display: flex;
+  
+    align-content: center;
+    flex-direction: row;
+  
+    position: relative;
+    min-height: 1px;
+  
+    scroll-padding-bottom: 3.5rem;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: var(--block-inner-padding);
+    padding-right: var(--block-outer-padding);
+  }
+  
+  .sankey-chart-svg {
+    pointer-events: none;
+  }
+  
+  .block.fake {
+    pointer-events: none;
+  }
+  
+  .block.highlight {
+    background-color: var(--color-secondary-active) !important;
+  }
+  
+  .block.negative {
+    background-image: linear-gradient(135deg, var(--color-neg-base) 16.67%, var(--color-background) 16.67%, var(--color-background) 50%, var(--color-neg-base) 50%, var(--color-neg-base) 66.67%, var(--color-background) 66.67%, var(--color-background) 100%);
+    background-size: 10px 10px;
+  }
+  
+  .block.highlight:not(.with-background) .label {
+    color: #000000 !important;
+  }
+  
+  .sankey-chart-svg .link {
+    opacity: 0.5;
+  }
+  
+  .link.highlight {
+    opacity: 0.7 !important;
+    fill: var(--color-secondary-active) !important;
+  }
+  
+  .highlight-link {
+    fill: var(--color-primary-active) !important;
+    stroke: none;
+  }
+  
+  .highlight-box {
+    fill: var(--color-primary-active) !important;
+    stroke: none;
+  }
+  
+  .column.narrow .block {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .label {
+    font-size: .7rem;
+    color: var(--color-short-text);
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: wrap;
+    padding: 2px;
+    font-size: .8rem;
+    line-height: 1.25em;
+    z-index: 1;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    margin: 0;
+  }
+  
+  .block.short .label-name {
+    overflow: hidden;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  .block.short .label {
+    display: flex;
+    align-items: center;
+    font-size: .7rem;
+  }
+  
+  .block.short.highlight.current-node {
+    z-index: 2;
+  }
+  
+  .block.with-background .label {
+    background-color: var(--color-background);
+  }
+  
+  .block.difference .label {
+    background-color: var(--color-background);
+  }
+  
+  .block.current-node {
+    background-color: var(--color-primary-active) !important;
+  }
+  
+  .label .label-amount {
+    font-weight: 700;
+    min-width: 60px;
+  }
+  
+  .column.narrow .label {
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    white-space: nowrap;
+    margin: 0;
+    padding: 2px 0;
+    transform: rotate(180deg);
+    writing-mode: vertical-rl;
+    direction: rtl;
+    text-orientation: sideways;
+  }
+  
+  .column.narrow .label .label-amount {
+    min-width: unset;
+    width: unset;
+  }
+  
+  .column.narrow .block.difference {
+    background-color: var(--color-background) !important;
+    background-image: linear-gradient(135deg, var(--color-difference) 16.67%, var(--color-background) 16.67%, var(--color-background) 50%, var(--color-difference) 50%, var(--color-difference) 66.67%, var(--color-background) 66.67%, var(--color-background) 100%);
+    background-size: 10px 10px;
+    font-weight: 500;
+  }
+  
+  .column.narrow .label {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row-reverse;
+    gap: 4px
+  }
+  
+  .column[data-level="0"] .group {
+    row-gap: 0px;
+  }
+  
+  .column .group:last-child .block:last-child {
+    margin-bottom: 15px;
+  }
+  
+  @media (max-width: 992px) {
+    .block {
+      padding: 0px 6px;
+    }
+  }
+}
+
