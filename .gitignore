@@ -48,3 +48,5 @@ next-env.d.ts
 scrapers/*/data/**
 .idea/
 data
+
+/src/generated/prisma
