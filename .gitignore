@@ -44,9 +44,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/scrapers/*/tmp/
-scrapers/*/data/**
-.idea/
-data
+
 
 /src/generated/prisma
