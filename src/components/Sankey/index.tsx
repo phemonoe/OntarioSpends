@@ -9,7 +9,7 @@ export function Sankey() {
 	const [data, setData] = useState<SankeyData | null>(null);
 
 	useEffect(() => {
-		fetch("/data/sankey_2024.json")
+		fetch("/data/sankey_2024_compact.json")
 			.then((r) => r.json())
 			.then((d) => setData(d));
 	}, []);

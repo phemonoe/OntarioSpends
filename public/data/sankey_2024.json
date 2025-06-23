@@ -57,7 +57,7 @@
             "amount": 0.529
           },
           {
-            "name": "Ontario Portion of the Federal Cannabis Excise Duty",
+            "name": "Federal Cannabis Excise Duty (Ontario Portion)",
             "amount": 0.346
           },
           {
@@ -141,12 +141,7 @@
       },
       {
         "name": "Fees, Donations and Other Revenues from Broader Public Sector Organizations",
-        "children": [
-          {
-            "name": "Fees, Donations and Other Revenues from Broader Public Sector Organizations",
-            "amount": 13.071
-          }
-        ]
+        "amount": 13.071
       },
       {
         "name": "Income from Investment in Government Business Enterprises",
@@ -158,7 +153,7 @@
         ]
       },
       {
-        "name": "Other",
+        "name": "Other Revenues",
         "children": [
           {
             "name": "Sales and Rentals",
